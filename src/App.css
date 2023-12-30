@@ -1,0 +1,152 @@
+.content {
+  height: 100vh;
+  background: linear-gradient(to bottom, rgba(27, 13, 59, .75), rgba(87, 121, 153, .75));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  color: #D6D0AC;
+  font-size: 1.5rem;
+}
+
+header {
+  width: 100vw;
+  padding-top: 40px;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: url('./images/anton-mislawsky-1B7vFqOn6og-unsplash.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: .7;
+
+  filter: blur(2px);
+  -webkit-filter: blur(4px);
+
+  z-index: -1;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  border-top: solid 2px rgb(138, 155, 202);
+  opacity: .7;
+}
+
+.line ~ .line {
+  opacity: .4;
+}
+
+.line ~ .line ~ .line {
+  opacity: .3;
+}
+
+.line ~ .line ~ .line ~ .line{
+  opacity: .2;
+}
+
+.banner {
+  margin-top: -30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  position: relative;
+}
+
+.banner-name {
+  font-family: 'Major Mono Display', monospace;
+  font-size: 5rem;
+  letter-spacing: -.7rem;
+}
+
+.banner-name-definition{
+  line-height: 1rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+}
+
+.nav {
+  height: 50px;
+  width: 100%;
+  margin-top: -.8rem;
+  background: rgba(24, 24, 24, 0.75); 
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  line-height: 1rem;
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 1.1rem;
+}
+
+.fade-in {
+  animation: fadein 5s both 5s;
+}
+
+@keyframes fadein{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.nav-btn:hover {
+  color: rgb(172, 185, 255);
+}
+
+.dot {
+  content: "";
+  background-color: hsl(255, 13%, 40%);
+  height: 8px;
+  width: 8px;
+  border-radius: 100px;
+}
+
+.search-box {
+ width: 800px;
+ display: flex;
+ background: rgba(24, 24, 24, 0.75);
+ border: solid 1px #787A87;
+ border-radius: 30px;
+ font-family: Kodchasan;
+}
+
+.search-box .btn {
+  background: rgba(47, 44, 56, 0.80);
+  padding: .5rem 2.5rem;
+  border: inherit;
+  border-radius: inherit;
+}
+
+.search-box input {
+  height: 100%;
+  flex: 1;
+  background-color: unset;
+  border: unset;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  padding: 0 20px;
+}
+
+.explore-title {
+  margin-top: 15vh;
+  font-family: 'Kodchasan', sans-serif;
+  font-size: 3.5rem;
+  letter-spacing: 1rem;
+}
+
+.explore-blurb {
+  font-family: 'Julius Sans One', sans-serif;
+}
+
