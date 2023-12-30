@@ -8,6 +8,9 @@
 
   color: #D6D0AC;
   font-size: 1.5rem;
+  animation: fadein 5s both 250ms;
+
+  cursor: default;
 }
 
 header {
@@ -15,7 +18,7 @@ header {
   padding-top: 40px;
 }
 
-.content::before {
+.bg-img {
   content: "";
   position: absolute;
   top: 0;
@@ -27,12 +30,9 @@ header {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  opacity: .7;
-
-  filter: blur(2px);
-  -webkit-filter: blur(4px);
 
   z-index: -1;
+  animation: intro-bg 5s forwards;
 }
 
 .line {
@@ -40,18 +40,22 @@ header {
   height: 2px;
   border-top: solid 2px rgb(138, 155, 202);
   opacity: .7;
+  animation: start-in-center 1s both 3s;
 }
 
-.line ~ .line {
+.line~.line {
   opacity: .4;
+  animation-delay: 3.25s;
 }
 
-.line ~ .line ~ .line {
+.line~.line~.line {
   opacity: .3;
+  animation-delay: 3.35s;
 }
 
-.line ~ .line ~ .line ~ .line{
+.line~.line~.line~.line {
   opacity: .2;
+  animation-delay: 3.45s;
 }
 
 .banner {
@@ -63,6 +67,7 @@ header {
   flex-wrap: wrap;
   gap: 15px;
   position: relative;
+  animation: start-in-center 1s both 3s;
 }
 
 .banner-name {
@@ -71,7 +76,7 @@ header {
   letter-spacing: -.7rem;
 }
 
-.banner-name-definition{
+.banner-name-definition {
   line-height: 1rem;
   font-family: 'EB Garamond', serif;
   font-size: 1.1rem;
@@ -81,7 +86,7 @@ header {
   height: 50px;
   width: 100%;
   margin-top: -.8rem;
-  background: rgba(24, 24, 24, 0.75); 
+  background: rgba(24, 24, 24, 0.75);
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -92,12 +97,7 @@ header {
 }
 
 .fade-in {
-  animation: fadein 5s both 5s;
-}
-
-@keyframes fadein{
-  0% {opacity: 0;}
-  100% {opacity: 1;}
+  animation: fadein 2s both 3s;
 }
 
 .nav-btn:hover {
@@ -113,19 +113,32 @@ header {
 }
 
 .search-box {
- width: 800px;
- display: flex;
- background: rgba(24, 24, 24, 0.75);
- border: solid 1px #787A87;
- border-radius: 30px;
- font-family: Kodchasan;
+  width: 800px;
+  display: flex;
+  background: rgba(24, 24, 24, 0.75);
+  border: solid 1px #787A87;
+  border-radius: 30px;
+  font-family: Kodchasan;
 }
 
 .search-box .btn {
-  background: rgba(47, 44, 56, 0.80);
+  background: hsla(255, 12%, 30%, 0.8);
   padding: .5rem 2.5rem;
-  border: inherit;
-  border-radius: inherit;
+  border-right: inherit;
+}
+
+.search-box .btn:nth-of-type(1) {
+  border-radius: 100px 0 0 100px;
+  border-left: inherit;
+}
+
+.search-box .btn:nth-of-type(2) {
+  border-radius: 0 100px 100px 0;
+  opacity: .5;
+}
+
+.search-box .btn:nth-of-type(2):hover {
+  opacity: 1;
 }
 
 .search-box input {
@@ -150,3 +163,34 @@ header {
   font-family: 'Julius Sans One', sans-serif;
 }
 
+@keyframes intro-bg {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: .7;
+    filter: blur(2px);
+    -webkit-filter: blur(4px);
+  }
+}
+
+@keyframes start-in-center {
+  0% {
+    transform: translateY(40vh);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

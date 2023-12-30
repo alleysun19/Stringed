@@ -8,6 +8,7 @@ function App() {
 
   return (
     <React.Fragment>
+    <div className='bg-img'></div>
     <div className='content'>
 
       <header>
