@@ -71,11 +71,11 @@ function App() {
         <div className='explore-blurb fade-in'>Try something new or jam to a favorite</div>
 
         <div className='search-box fade-in'>
-          <input type='text' name='search' s
+          <input type='text' name='search'
             placeholder='Enter song or artist name'
             onChange={(e) => setSearchString(e.target.value)} />
           <div className='btn'>Search</div>
-          <div className={`btn ${showFilters ? 'selected' : ''}`}
+          <div className={`btn filter-btn ${showFilters ? 'show-filters' : ''}`}
             onClick={() => { showFiltersOnClick() }}>Filters</div>
           {filters}
         </div>
