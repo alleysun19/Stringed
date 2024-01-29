@@ -1,236 +1,114 @@
-:root {
-  --spacing: .2rem;
-} 
-
-.content {
-  height: 100vh;
-  background: linear-gradient(to bottom, rgba(27, 13, 59, .75), rgba(87, 121, 153, .75));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-
+html {
+  box-sizing: border-box;
   color: #D6D0AC;
-  font-size: 1.1rem;
-  animation: fadein 5s both 250ms;
-
-  cursor: default;
-
-  overflow-x: hidden;
-  overflow-y: scroll;
 }
 
-.bg-img {
+*, *::before, *>::after {
+  box-sizing: inherit;
+}
+
+:root
+{
+  --link: hsl(222, 33%, 59%);
+  --hover-link: hsl(222, 95%, 75%);
+
+  --font-secondary: 'Julius Sans One', sans-serif;
+} 
+
+body {
+  font-family: 'Kodchasan', sans-serif;
+}
+
+.page {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(24, 24, 24);
+  position: relative;
+  z-index: 1;
+  
+}
+
+.page.explore .nav {
+  background: rgba(24, 24, 24, 0.75);
+}
+
+.content {
+  max-width: 900px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  padding: .4rem;
+  height: 80vh;
+}
+
+.background,
+.background::after {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
 
-  background: url('./images/anton-mislawsky-1B7vFqOn6og-unsplash.jpg');
+.background {
+  background: url('./assets/images/anton-mislawsky-1B7vFqOn6og-unsplash.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 
   z-index: -1;
-  animation: intro-bg 5s forwards;
+  filter: blur(2px)
 }
 
-header {
-  width: 100%;
-  padding-top: 40px;
+.background::after {
+  background: linear-gradient(to bottom, hsla(258, 64%, 34%, 0.75), hsla(209, 27%, 50%, 0.75));
+  animation: fade-in 5s both;
 }
 
-.line {
-  width: 100%;
-  height: 2px;
-  border-top: solid 2px rgb(138, 155, 202);
-  opacity: .7;
-  animation: start-in-center 1s both 3s;
+.blur-bg-image {
+  animation: blur-bg 2s both 1s;
 }
 
-.line~.line {
-  opacity: .4;
-  animation-delay: 3.25s;
+.hide-bg-image {
+  animation: fade-out 550ms both;
 }
 
-.line~.line~.line {
-  opacity: .3;
-  animation-delay: 3.45s;
-}
-
-.line~.line~.line~.line {
-  opacity: .2;
-  animation-delay: 3.65s;
-}
-
-.line~.line~.line~.line~.line {
-  opacity: .07;
-  animation-delay: 3.85s;
-}
-
-.banner {
-  margin-top: -20px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  animation: start-in-center 1s both 3s;
-}
-
-.banner-name {
-  font-family: 'Major Mono Display', monospace;
-  font-size: 5rem;
-  letter-spacing: -.7rem;
-}
-
-.banner-name-definition {
-  line-height: 1rem;
-  font-family: 'EB Garamond', serif;
-}
-
-@media (max-width: 650px) {
-  .banner-name-definition {
-    display: none;
-  }
-}
-
-.nav {
-  height: 50px;
-  width: 100%;
-  margin-top: -.3rem;
-  background: rgba(24, 24, 24, 0.75);
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Julius Sans One', sans-serif;
-  font-size: 1.1rem;
-}
-
-.fade-in {
-  animation: fadein 2s both 3s;
-}
-
-.nav-btn:hover {
-  color: rgb(172, 185, 255);
-}
-
-.dot {
-  content: "";
-  background-color: hsl(255, 13%, 40%);
-  height: 8px;
-  width: 8px;
-  border-radius: 100px;
-}
-
-.search-box {
-  width: 100%;
-  max-width: 800px;
-  display: flex;
-  font-family: Kodchasan;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  padding: 10px;
-}
-
-.search-box input {
-  flex: 5;
-  background-color: unset;
-  background: rgba(24, 24, 24, 0.75);
-  border: unset;
-  font-family: inherit;
-  font-size: 1.2rem;
-  padding: 1rem 1.5rem;
-  border-radius: 30px 0 0 30px;
-  accent-color: #2f2931bf;
-
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.search-box .btn {
-  background: #2f2931bf;
-  padding: 1rem 2rem;
-  font-family: 'Julius Sans One', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex:1;
-  box-sizing: border-box;
-}
-
-.search-box .btn:hover {
-  color: rgb(172, 185, 255);
-}
-
-.btn.filter-btn {
-  border-radius: 0 100px 100px 0;
-  background: hsla(285, 9%, 27%, 0.749);
-  opacity: .5;
-}
-
-.search-box .btn.show-filters,
-.search-box .btn.filter-btn:hover {
-  opacity: 1;
-}
-
-@media (max-width: 580px) {
-  .search-box .btn {
-    border-radius: 0 100px 100px 0;
-  }
-  .search-box .btn.filter-btn {
-    margin-top: 1rem;
-    border-radius: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-box .btn {
-    flex: 1 0 50%;
-    margin-top: 1rem;
-    border-radius: 100px 0 0 100px;
-  }
-  .search-box .btn.filter-btn {
-    border-radius: 0 100px 100px 0;
-  }
-  .search-box input {
-    border-radius: 100px;
-  }
-}
-
-@media (max-width: 300px) {
-  .search-box .btn, .search-box .btn.filter-btn {
-    flex-basis: 100%;
-    margin-top: 1rem;
-    border-radius: 100px;
-  }
+.show-bg-image {
+  animation: fade-in 550ms both;
 }
 
 .explore-title {
   padding-block: 10vh 10px;
-  font-family: 'Kodchasan', sans-serif;
   font-size: 3.5rem;
   letter-spacing: 1rem;
-  animation: flash 2s backwards 2.2s ease-out;
+  overflow: hidden;
+  white-space: collapse balance;
+}
+
+.explore-title.bring-letters-together {
+  animation: bring-letters-together 1.5s backwards 1.5s ease-out;
 }
 
 .explore-blurb {
-  text-align: center;
   font-family: 'Julius Sans One', sans-serif;
   font-size: 1.3rem;
   letter-spacing: .2rem;
 }
 
-@keyframes flash {
+.page-load-fade-in {
+  animation: fade-in 2s both 2s;
+}
+
+@keyframes bring-letters-together {
   0% {
     opacity: 0;
     letter-spacing: 10rem;
-    transform: scale(150%);
-
   }
 
   50% {
@@ -238,43 +116,22 @@ header {
   }
 
   100% {
-    transform: scale(100%);
     letter-spacing: 1rem;
     opacity: 1;
   }
 }
 
-.filters-container {
-  margin-top: 10px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-@keyframes intro-bg {
+@keyframes blur-bg {
   0% {
-    opacity: 1;
+    filter: blur(0px);
   }
 
   100% {
-    opacity: .7;
     filter: blur(2px);
-    -webkit-filter: blur(4px);
   }
 }
 
-@keyframes start-in-center {
-  0% {
-    transform: translateY(40vh);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadein {
+@keyframes fade-in {
   0% {
     opacity: 0;
   }
@@ -283,3 +140,22 @@ header {
     opacity: 1;
   }
 }
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.link {
+  color: var(--link);
+}
+
+.font-secondary {
+  font-family: 'Julius Sans One', sans-serif;
+}
+

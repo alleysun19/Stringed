@@ -1,0 +1,41 @@
+.filter {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    border: solid .2rem hsla(285, 40%, 75%, 0);
+    background-clip: padding-box;
+}
+
+.title {
+    background: #2f2931bf;
+    padding: 10px 15px;
+    font-family: var(--font-secondary);
+}
+
+.options {
+    padding: 10px;
+    background: hsla(285, 9%, 27%, 0.749);
+    text-align: start;
+    font-size: .85rem;
+    flex: 1;
+}
+
+.filter.row {
+    width: 100%;
+    flex-direction: row;
+}
+
+.filter.row .title{
+    flex-basis: 20%;
+}
+
+.filter.row .options {
+    flex-grow: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.option {
+    min-width: max-content;
+}

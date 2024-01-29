@@ -1,90 +1,91 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
-import Filter from './Filter'
+import React, { useEffect, useRef, useState } from 'react';
+
+import Nav from './components/Nav'
+import Searchbox from './components/Searchbox'
+import Home from './components/Home'
+
+
+const Page = {
+  Home: Symbol("home"),
+  SavedMusic: Symbol("savedMusic"),
+  Explore: Symbol("explore"),
+}
 
 function App() {
 
-  const [searchString, setSearchString] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
+  const [currentPage, setCurrentPage] = useState(Page.Explore);
 
-  let filters = '';
-  let filtersButtonOpacity = '';
+  const initalPageLoad = useRef(true);
 
-  const showFiltersOnClick = () => {
-    setShowFilters(!showFilters);
+  useEffect(() => {
+    // Check if this is the first load by seeing if our object exists in local storage
+    if (localStorage.getItem('firstLoadDone') === null) {
+      // first load - set the flag in local storage to true
+      localStorage.setItem('firstLoadDone', 1);
+      initalPageLoad.current = true;
+    } else {
+      // set flag to prevent opening animations
+      initalPageLoad.current = false;
+    }
+  });
+
+  function setPage(newPage) {
+    if (newPage !== currentPage) {
+      setCurrentPage(newPage);
+    }
   }
 
-  if (showFilters) {
-    filtersButtonOpacity = { opacity: '1' };
-    filters = <div className='filters-container'>
-      <Filter title="Difficulty" type="checkboxes"
-        options={["Just Starting", "Beginner", "Intermediate", "Advanced", "Expert"]} />
-      <Filter title="Tuning" type="checkboxes"
-        options={["Standard", "Drop D", "1/2 Step Down", "Drop C", "Drop Db"]} />
-      <Filter title="Decade" type="checkboxes"
-        options={["2020s", "2010s", "2000s", "1990s", "1980s"]} />
-      <Filter title="Genre" type="checkboxes"
-        options={["Rock", "Metal", "Pop", "Punk", "Country"]} />
-      <Filter title="Type" type="checkboxes"
-        options={["Tab", "Chord"]} />
-      <Filter title="Instrument" type="checkboxes"
-        options={["Guitar - Electric", "Guitar - Acoustic"]} />
-    </div>
+  let page = ''
+  let content = '';
+  let bgAnimations = '';
+
+  function displayHomePage() {
+    bgAnimations = 'hide-bg-image';
+    content = <Home />;
+  }
+
+  function displaySavedMusicPage() {
+
+  }
+
+  function displayExplorePage() {
+    bgAnimations = initalPageLoad.current ? 'blur-bg-image' : 'show-bg-image';
+    content =
+      <React.Fragment>
+        <div className={`explore-title ${initalPageLoad.current ? 'bring-letters-together' : ''}`}>Explore</div>
+        <div className={`explore-blurb ${initalPageLoad.current ? 'page-load-fade-in' : ''}`}>Try something new or jam to a favorite</div>
+        <Searchbox initalPageLoad={initalPageLoad.current} />
+      </React.Fragment>
+  }
+
+  switch (currentPage) {
+    case Page.Home:
+      displayHomePage();
+      break;
+    case Page.SavedMusic:
+      break;
+    case Page.Explore:
+      page = 'explore';
+    default:
+      displayExplorePage();
+      break;
   }
 
   return (
-    <React.Fragment>
-      
-      <div className='bg-img'></div>
+    <div className={`page ${page}`}>
+
+      <Nav setPage={setPage} />
+
+      <div className={`background ${bgAnimations}`}></div>
+
       <div className='content'>
-
-        <header>
-          <div className='line'></div>
-          <div className='line'></div>
-          <div className='line'></div>
-          <div className='line'></div>
-          <div className='line'></div>
-          <div className='banner'>
-            <span className='banner-name'>StRinGed</span>
-            <div className='banner-name-definition'>
-              <span style={{ fontStyle: 'italic' }}>adjectve:</span><br />
-              1: fitted with strings<br />
-              2: produced or sounded by strings<br />
-              3. made for the shredding of riffs
-
-            </div>
-          </div>
-
-          <div className='nav fade-in'>
-            <div className='dot'></div>
-            <div className='nav-btn'>Home</div>
-            <div className='dot'></div>
-            <div className='nav-btn'>Saved Music</div>
-            <div className='dot'></div>
-            <div className='nav-btn'>Explore</div>
-            <div className='dot'></div>
-          </div>
-        </header>
-
-        <div className='explore-title'>Explore</div>
-        <div className='explore-blurb fade-in'>Try something new or jam to a favorite</div>
-
-        <div className='search-box fade-in'>
-          <input type='text' name='search'
-            placeholder='Enter song or artist name'
-            onChange={(e) => setSearchString(e.target.value)} />
-          <div className='btn'>Search</div>
-          <div className={`btn filter-btn ${showFilters ? 'show-filters' : ''}`}
-            onClick={() => { showFiltersOnClick() }}>Filters</div>
-          {filters}
-        </div>
-
+        {content}
       </div>
 
-    </React.Fragment>
+    </div>
   );
 
 }
 
-export default App;
+export { App, Page };

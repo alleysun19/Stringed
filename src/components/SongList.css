@@ -1,0 +1,38 @@
+.song-list {
+    flex: 1;
+}
+
+.list-banner {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    height: 10rem;
+    overflow: hidden;
+    position: relative;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+}
+
+.list-banner::before {
+    content: '';
+    background-color: hsla(240, 50%, 16%, .7);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: -1;
+}
+
+.list-title {
+    z-index: 1;
+    flex:1;
+    background-color: hsla(240, 8%, 20%, .7);
+    font-size: 1.5rem;
+    padding: 1rem;
+    box-shadow: 11px 0px 32px 10px hsl(240, 8%, 5%);
+    font-family: var(--font-secondary);
+}

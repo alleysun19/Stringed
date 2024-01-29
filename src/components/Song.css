@@ -1,0 +1,40 @@
+.song {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    background-color: #1E2432;
+    text-align: start;
+    gap: .25rem;
+    padding: .25rem;
+
+}
+
+.song-title {
+    grid-column: 1 / span 2;
+    font-size: 1.3rem;
+    text-decoration: underline;
+    text-decoration-color: hsla(51, 34%, 76%, .5);
+    padding: .25rem;
+    box-shadow: 0px 0px 32px 10px hsla(230, 20%, 25%, .5);
+
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+.song-title:hover {
+    color: var(--hover-link);
+    text-decoration-color: var(--link)
+}
+
+.song-type {
+    text-align: end;
+}
+
+.song>:not(.song-title) {
+    font-family: var(--font-secondary);
+    color: hsla(51, 34%, 76%, .7);
+    z-index: 1;
+}
+
