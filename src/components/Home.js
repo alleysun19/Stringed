@@ -21,7 +21,6 @@ function Home() {
             if (textRef.current) {
                 // Check if the content is clipped by comparing scrollHeight and clientHeight
                 const isTextClipped = textRef.current.scrollHeight > textRef.current.clientHeight ? true : false;
-                console.log(`scrollHeight ${textRef.current.scrollHeight} clientHeight ${textRef.current.clientHeight}`);
                 setClipFact(isTextClipped);
             }
         };

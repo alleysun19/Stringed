@@ -6,6 +6,7 @@
     text-align: start;
     gap: .25rem;
     padding: .25rem;
+    overflow: hidden;
 
 }
 
@@ -37,4 +38,24 @@
     color: hsla(51, 34%, 76%, .7);
     z-index: 1;
 }
+
+.scroll-title {
+    animation-name: scroll-title;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    overflow: visible; 
+}
+
+@keyframes scroll-title {
+    0% {
+        transform: translateX(0);
+    }
+  
+    50% {
+      transform: translateX(var(--scrollWidth));
+    }
+    100% {
+        transform: translateX(0);
+      }
+  }
 
