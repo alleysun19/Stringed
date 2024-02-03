@@ -46,6 +46,32 @@
     overflow: visible; 
 }
 
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.star {
+    background-image: url('../assets/images/star.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: invert(48%) sepia(100%) saturate(2050%) hue-rotate(19deg) brightness(93%) contrast(86%);
+    height: var(--star-size);
+    width: var(--star-size);
+}
+
+.star.half {
+    background-position: left .6rem top 0px;
+    margin-left: calc(var(--star-size) / -2);
+}
+
+.num-ratings{
+    display: inline-block;
+    font-size: .85rem;
+    margin-inline: .3rem;
+}
+
 @keyframes scroll-title {
     0% {
         transform: translateX(0);
