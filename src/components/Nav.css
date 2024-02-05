@@ -1,6 +1,8 @@
 header {
-    width: 100%;
     animation: fade-in 2s both 250ms;
+    margin-top: 40px;
+    position: relative;
+    z-index: 2;
 }
 
 .line {
@@ -13,7 +15,6 @@ header {
 
 
 .line:nth-of-type(1) {
-    padding-top: 40px;
     opacity: .7;
     animation-delay: 2s;
 }
@@ -23,7 +24,7 @@ header {
     animation-delay: 2.2s;
 }
 
-.line:nth-of-type(3){
+.line:nth-of-type(3) {
     opacity: .3;
     animation-delay: 2.4s;
 }
@@ -78,6 +79,30 @@ header {
     font-family: var(--font-secondary);
     font-size: 1.1rem;
 }
+
+header.sticky-nav>.nav {
+    position: fixed;
+    top: 0;
+}
+
+@media (min-width: 700px) {
+    header.sticky-nav>.nav::after {
+        content: 'StRinGed';
+        font-size: 1.5rem;
+        position: absolute;
+        font-family: 'Major Mono Display', monospace;
+        top: 2px;
+        left: 1rem;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+    }
+}
+
+header.sticky-nav .banner {
+    margin-bottom: var(--nav-height);
+}
+
 
 .nav-btn:hover {
     color: hsl(231, 100%, 84%);

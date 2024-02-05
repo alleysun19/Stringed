@@ -72,8 +72,10 @@ function App() {
       break;
   }
 
+
   return (
-    <div className={`page ${page}`}>
+
+    <React.Fragment>
 
       <Nav setPage={setPage} />
 
@@ -82,8 +84,9 @@ function App() {
       <div className='content'>
         {content}
       </div>
+      
+    </React.Fragment>
 
-    </div>
   );
 
 }

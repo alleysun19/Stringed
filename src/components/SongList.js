@@ -1,14 +1,25 @@
 import React from "react";
 import './SongList.css'
 import Song from './Song'
+import songList from "../assets/songList";
 
 function SongList({ header, title }) {
+
+    const songs = songList.map(({ artist, type, title, rating, numRatings, username }) =>
+        <Song
+            band={artist}
+            type={type}
+            title={title}
+            rating={rating}
+            numRatings={numRatings}
+            username={username} />);
+
     return (
         <div className='song-list'>
-            <div className='list-banner' style={{backgroundImage : header}}>
+            <div className='list-banner' style={{ backgroundImage: header }}>
                 <div className="list-title">{title}</div>
             </div>
-            <Song band='Brand New' type='Tab' title="Okay I Believe You But My Tommy Gun Don't" rating={4.5} numRatings= {1234} username='alleysun19'/>
+            {songs}
         </div>
     );
 }

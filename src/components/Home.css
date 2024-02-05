@@ -42,7 +42,6 @@
 
 .fun-fact{
     display: flex;
-    overflow: hidden;
     background-color: #1E2432;
     gap: .5rem;
 }
