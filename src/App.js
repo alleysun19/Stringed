@@ -2,13 +2,15 @@ import './App.css';
 import React, { useEffect, useRef, useState } from 'react';
 
 import Nav from './components/Nav'
-import Searchbox from './components/Searchbox'
+
+import Explore from './components/Explore'
 import Home from './components/Home'
+import Library from './components/Library'
 
 
 const Page = {
   Home: Symbol("home"),
-  SavedMusic: Symbol("savedMusic"),
+  Library: Symbol("library"),
   Explore: Symbol("explore"),
 }
 
@@ -30,62 +32,46 @@ function App() {
     }
   });
 
-  function setPage(newPage) {
+  function changePage(newPage) {
     if (newPage !== currentPage) {
       setCurrentPage(newPage);
     }
   }
 
-  let page = ''
   let content = '';
-  let bgAnimations = '';
-
-  function displayHomePage() {
-    bgAnimations = 'hide-bg-image';
-    content = <Home />;
-  }
-
-  function displaySavedMusicPage() {
-
-  }
-
-  function displayExplorePage() {
-    bgAnimations = initalPageLoad.current ? 'blur-bg-image' : 'show-bg-image';
-    content =
-      <React.Fragment>
-        <div className={`explore-title ${initalPageLoad.current ? 'bring-letters-together' : ''}`}>Explore</div>
-        <div className={`explore-blurb ${initalPageLoad.current ? 'page-load-fade-in' : ''}`}>Try something new or jam to a favorite</div>
-        <Searchbox initalPageLoad={initalPageLoad.current} />
-      </React.Fragment>
-  }
 
   switch (currentPage) {
     case Page.Home:
-      displayHomePage();
+      content = <Home />;
       break;
-    case Page.SavedMusic:
+    case Page.Library:
+      content = <Library />;
       break;
     case Page.Explore:
-      page = 'explore';
     default:
-      displayExplorePage();
+      content = <Explore />;
       break;
   }
 
-
   return (
 
-    <React.Fragment>
+    <div className={`${initalPageLoad.current ? 'init' : ''}  ${currentPage.description}-page`}>
 
-      <Nav setPage={setPage} />
+      <Nav setPage={changePage} />
 
-      <div className={`background ${bgAnimations}`}></div>
+      <div className={'bg-overlays'}>
+        <div className='bg-explore'></div>
+        <div className={`bg-library ${currentPage === Page.Library ? 'show' : 'hide'}`}>
+          <div className='bg-half'></div>
+          <div className='bg-half'></div>
+        </div>
+      </div>
 
       <div className='content'>
         {content}
       </div>
-      
-    </React.Fragment>
+
+    </div>
 
   );
 

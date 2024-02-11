@@ -55,11 +55,11 @@ function Nav({ setPage }) {
         </div>
       </div>
 
-      <div ref={navRef} className='nav page-load-fade-in'>
+      <div ref={navRef} className='nav'>
         <div className='dot'></div>
         <div className='nav-btn' onClick={() => setPage(Page.Home)}>Home</div>
         <div className='dot'></div>
-        <div className='nav-btn' onClick={() => setPage(Page.SavedMusic)}>Saved Music</div>
+        <div className='nav-btn' onClick={() => setPage(Page.Library)}>Library</div>
         <div className='dot'></div>
         <div className='nav-btn' onClick={() => setPage(Page.Explore)}>Explore</div>
         <div className='dot'></div>

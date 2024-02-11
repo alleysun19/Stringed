@@ -11,18 +11,12 @@ html {
 {
   --link: hsl(222, 33%, 59%);
   --hover-link: hsl(222, 95%, 75%);
-
   --font-secondary: 'Julius Sans One', sans-serif;
 } 
 
 body {
   font-family: 'Kodchasan', sans-serif;
-  background-color: rgb(24, 24, 24);
   overflow-y: scroll;
-}
-
-.explore .nav {
-  background: rgba(24, 24, 24, 0.75);
 }
 
 .content {
@@ -35,90 +29,160 @@ body {
   padding: .4rem;
 }
 
-.background,
-.background::after {
+
+.bg-overlays,
+.bg-overlays>.bg-explore,
+.bg-overlays>.bg-explore::after,
+.bg-library>.bg-half::after {
   content: "";
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; 
+  z-index: -1;
 }
 
-.background {
+.bg-overlays {
+  background-color: rgb(24, 24, 24);
+}
+
+
+/*  EXPLORE PAGE BACKGROUND *******************************************************/
+
+/* background image layer */
+.bg-explore {
   background: url('./assets/images/anton-mislawsky-1B7vFqOn6og-unsplash.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 
-  filter: blur(2px)
-}
-
-.background::after {
-  background: linear-gradient(to bottom, hsla(258, 64%, 34%, 0.75), hsla(209, 27%, 50%, 0.75));
-  animation: fade-in 5s both;
-}
-
-.blur-bg-image {
-  animation: blur-bg 2s both 1s;
-}
-
-.hide-bg-image {
-  animation: fade-out 550ms both;
-}
-
-.show-bg-image {
+  filter: blur(2px);
   animation: fade-in 550ms both;
 }
 
-.explore-title {
-  padding-block: 10vh 10px;
-  font-size: 3.5rem;
-  letter-spacing: 1rem;
-  overflow: hidden;
-  white-space: collapse balance;
+/* gradient overlay */
+.bg-explore::after {
+  background: linear-gradient(to bottom, hsla(258, 64%, 34%, 0.75), hsla(209, 27%, 50%, 0.75));
 }
 
-.explore-title.bring-letters-together {
-  animation: bring-letters-together 1.5s backwards 1.5s ease-out;
+/* on site load, bg image starts focused and blurs as page content become visible */
+.init>.bg-overlays .bg-explore{
+  animation: blur-bg 2s both 1s;
 }
 
-.explore-blurb {
-  font-family: 'Julius Sans One', sans-serif;
-  font-size: 1.3rem;
-  letter-spacing: .2rem;
+/* on site .load, fade in the gradient over the bg image */
+.init>.bg-overlays .bg-explore::after {
+  animation: fade-in 5s both;
 }
 
-.page-load-fade-in {
-  animation: fade-in 2s both 2s;
+/* fade out explore bg/gradient when switching pages */
+.home-page .bg-explore, .library-page .bg-explore {
+  animation: fade-out 550ms both;
 }
 
-@keyframes bring-letters-together {
+/*  LIBRARY PAGE BACKGROUND *******************************************************/
+
+/* hide on side load to not interfere with opening explore page animations */
+.init .bg-library>.bg-half {
+  visibility: hidden;
+}
+
+/* library bg consists of two images each taking up 50% of the screen */
+.bg-library>.bg-half {
+  visibility: visible;
+
+  position: fixed;
+
+  top: 0;
+  bottom: 0;
+  right: 50%;
+  left: 0; 
+
+  background-image: url('./assets/images/jakayla-toney-v8TzUCgzDFw-unsplash_cropped.jpg');
+  background-position: right;
+  background-size: cover;
+
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+
+  filter: contrast(75%);
+  z-index: 2;
+  backface-visibility: hidden;
+}
+
+/* push second image to the right side and rotate upside down */
+.bg-half+.bg-half {
+      right: 0;
+      left: calc(50%);
+      transform: rotate(180deg);
+}
+
+/* gardient overlay */
+.bg-half::after {
+  background: linear-gradient(to bottom, hsla(258, 85%, 30%, 0.75) 35%, hsla(219, 75%, 30%, 0.75));
+} 
+
+/* do another 180deg rotation no second psuedo element to align it with the gradient of first psuedo element */
+.bg-half+.bg-half::after {
+  transform: rotate(180deg);
+} 
+
+/* animations to move bg images into/out of the viewport when switching to/from the library page respectively */
+.show .bg-half {
+  animation-name: move-in-up;
+}
+
+.show .bg-half+.bg-half{
+  animation-name: move-in-down;
+}
+
+.hide .bg-half {
+  animation-name: move-out-left;
+}
+
+.hide .bg-half+.bg-half {
+  animation-name: move-out-right;
+}
+
+
+@keyframes move-out-left {
   0% {
-    opacity: 0;
-    letter-spacing: 10rem;
-  }
+      transform: translateX(0);
 
-  50% {
-    opacity: 0;
   }
-
   100% {
-    letter-spacing: 1rem;
-    opacity: 1;
+      transform: translateX(-100%);
   }
 }
 
-@keyframes blur-bg {
+@keyframes move-out-right {
   0% {
-    filter: blur(0px);
-  }
+      transform: translateX(0) rotate(180deg);
 
+  }
   100% {
-    filter: blur(2px);
+      transform: translateX(100%) rotate(180deg);
+  }
+}
+
+@keyframes move-in-up {
+  0% {
+      transform: translateY(100%);
+
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+
+@keyframes move-in-down {
+  0% {
+      transform: translateY(-100%) rotate(180deg);
+  }
+  100% {
+      transform: translateY(0) rotate(180deg);
   }
 }
 

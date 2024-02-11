@@ -6,6 +6,10 @@
     padding: 10px;
 }
 
+.init .search-box {
+    animation: fade-in 2s both 2s;
+}
+
 .search-box input {
     flex: 5;
     background-color: unset;

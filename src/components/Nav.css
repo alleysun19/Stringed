@@ -2,7 +2,7 @@ header {
     animation: fade-in 2s both 250ms;
     margin-top: 40px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 .line {
@@ -71,13 +71,22 @@ header {
     height: 50px;
     width: 100%;
     margin-top: -.3rem;
-    background: hsl(250, 14%, 14%);
+    background: hsl(240, 8%, 16%);
     display: flex;
     gap: 10px;
     justify-content: center;
     align-items: center;
     font-family: var(--font-secondary);
     font-size: 1.1rem;
+    animation: fade-in 2s both 2s;
+}
+
+.explore-page :not(.sticky-nav) .nav {
+    background: hsla(240, 8%, 16%, .75);
+}
+
+.library-page :not(.sticky-nav) .nav {
+    background: hsla(171, 59%, 11%, 0.65);
 }
 
 header.sticky-nav>.nav {

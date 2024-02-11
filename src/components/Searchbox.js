@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Filter from './Filter'
 import filterList from '../assets/filtersList'
 
-function Searchbox({ initalPageLoad }) {
+function Searchbox() {
 
     const [searchString, setSearchString] = useState('');
     const [showFilters, setShowFilters] = useState(false);
@@ -28,7 +28,7 @@ function Searchbox({ initalPageLoad }) {
         }
     }
     return (
-        <div className={`search-box ${initalPageLoad ? 'page-load-fade-in' : ''}`}>
+        <div className={'search-box'}>
 
             <input type='text' name='search'
                 placeholder='Enter song or artist name'

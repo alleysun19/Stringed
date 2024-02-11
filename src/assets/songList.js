@@ -9,7 +9,7 @@ const songList = [
         username: "alleysun19"
     },
     {
-        title: "Enter Sandman",
+        title: "...And Justice For All",
         artist: "Metallica",
         type: 'chord',
         rating: 4,
